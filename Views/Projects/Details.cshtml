@@ -1,0 +1,57 @@
+﻿@model SMTIStudent_ProjectManagement.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .custom-button {
+        background-color: #FFC107;
+        border-color: #FFC107;
+        color: black;
+        margin: 0 auto;
+    }
+
+    .custom-button:hover {
+        background-color: darkgoldenrod;
+        border-color: darkgoldenrod;
+        color: white;
+    }
+</style>
+
+<h2 style="text-align: center; margin-top: 50px;">Projects</h2>
+<br>
+
+<div>
+    <h3>Details</h3>
+    <br>
+    <dl class="dl-horizontal">
+        <dt>
+            Project Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectTitle)
+        </dd>
+        <br>
+
+        <dt>
+            Due Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+        <br>
+    </dl>
+
+    @using (Html.BeginForm())
+     {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back", "Index", null, new { style = "color: black;" })
+        </div>
+     }
+</div>

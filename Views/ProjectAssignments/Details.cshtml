@@ -1,0 +1,66 @@
+﻿@model SMTIStudent_ProjectManagement.Models.ProjectAssignment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .custom-button {
+        background-color: #FFC107;
+        border-color: #FFC107;
+        color: black;
+        margin: 0 auto;
+    }
+
+    .custom-button:hover {
+        background-color: darkgoldenrod;
+        border-color: darkgoldenrod;
+        color: white;
+    }
+</style>
+
+<h2 style="text-align: center; margin-top: 50px;">Assign Projects</h2>
+<br>
+
+<div>
+    <h3>Details</h3>
+    <br>
+    <dl class="dl-horizontal">
+        <dt>
+            Submitted Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmittedDate)
+        </dd>
+        <br>
+
+        <dt>
+            Project Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.ProjectTitle)
+        </dd>
+        <br>
+
+        <dt>
+            First Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+        <br>
+    </dl>
+
+    @using (Html.BeginForm())
+     {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back", "Index", null, new { style = "color: black;" })
+        </div>
+     }
+</div>

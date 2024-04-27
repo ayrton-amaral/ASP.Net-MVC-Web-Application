@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SMTIStudent_ProjectManagement.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .custom-button {
+        background-color: #FFC107;
+        border-color: #FFC107;
+        color: black;
+        margin: 0 auto;
+    }
+
+    .custom-button:hover {
+        background-color: darkgoldenrod;
+        border-color: darkgoldenrod;
+        color: white;
+    }
+</style>
+
+@if (Session["userTypeLogged"] != null && Session["userTypeLogged"].ToString() == "Student")
+ {
+    <div class="projects-image">
+        <img src="../images/projects-image.jpg" alt="Projects image" style="max-width: 25%; display: block; margin: 50px auto 0 auto;" />
+    </div>
+    <h2 style="text-align: center; margin-top: 10px;">Projects</h2>
+    <br>
+ }
+
+@if (Session["userTypeLogged"] != null && Session["userTypeLogged"].ToString() == "Teacher")
+ {
+    <h2 style="text-align: center; margin-top: 50px;">Projects</h2>
+    <br>
+    <div class="text-center">
+        <a href="@Url.Action("Create")" class="btn btn-default custom-button">Create a New Project</a>
+    </div>
+    <br>
+    <br>
+ }
+
+<table class="table">
+    <tr>
+        <th>
+            Project Title
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+     {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+
+            @if (Session["userTypeLogged"] != null && Session["userTypeLogged"].ToString() == "Teacher")
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProjectId }, new { style = "color: darkgoldenrod;" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProjectId }, new { style = "color: darkgoldenrod;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProjectId }, new { style = "color: darkgoldenrod;" })
+                </td>
+            }
+        </tr>
+     }
+</table>
+<br>
+<br>

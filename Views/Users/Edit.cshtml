@@ -1,0 +1,99 @@
+﻿@model SMTIStudent_ProjectManagement.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .custom-button {
+        background-color: #FFC107;
+        border-color: #FFC107;
+        color: black;
+        margin: 0 auto;
+    }
+
+    .custom-button:hover {
+        background-color: darkgoldenrod;
+        border-color: darkgoldenrod;
+        color: white;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h2 style="text-align: center; margin-top: 50px;">Users</h2>
+    <br>
+    <h3>Edit User Information</h3>
+    <br>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.UserId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, "Username", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+        @Html.Label("User Type", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div>
+            @Html.DropDownListFor(model => model.UserType, new SelectList(new[]
+            {
+                new SelectListItem { Text = "Teacher", Value = "Teacher" },
+                new SelectListItem { Text = "Student", Value = "Student" }
+            }, "Value", "Text"), "Select User Type", new { @class = "form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default custom-button" />
+        </div>
+    </div>
+    <br>
+</div>
+ }
+
+<div>
+    @Html.ActionLink("Back", "Index", null, new { style = "color: black;" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

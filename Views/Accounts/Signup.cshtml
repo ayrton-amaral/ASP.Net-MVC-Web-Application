@@ -1,0 +1,95 @@
+﻿@model SMTIStudent_ProjectManagement.Models.User
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .custom-button {
+        background-color: #FFC107;
+        border-color: #FFC107;
+        color: black;
+        margin: 0 auto;
+    }
+
+    .custom-button:hover {
+        background-color: darkgoldenrod;
+        border-color: darkgoldenrod;
+        color: white;
+    }
+</style>
+
+@using (Html.BeginForm("Signup", "Accounts", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <br>
+            <h1 style="text-align: center; margin-top: 50px;">Sign Up</h1>
+            <br>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("First Name", htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                @Html.Label("Last Name", htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                @Html.Label("Username", htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                @Html.Label("User Type", htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.DropDownListFor(model => model.UserType, new SelectList(new[]
+                    {
+                        new SelectListItem { Text = "Teacher", Value = "Teacher" },
+                        new SelectListItem { Text = "Student", Value = "Student" }
+                    }, "Value", "Text"), "Select User Type", new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Signup" class="btn btn-default custom-button" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    <br />
+    @Html.ActionLink("Click here to Login", "Login", "Accounts", null, new { @style = "color: black;" })
+    <br />
+    <br />
+</div>
+
